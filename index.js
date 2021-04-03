@@ -1,8 +1,13 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
 const fetch = require("node-fetch");
-
 const client = new Discord.Client();
+let config;
+let local = false;
+if (!process.env.SERVER) {
+  console.log("dfsfs");
+  config = require("./config.json");
+  local = true;
+}
 
 const prefix = "!";
 
@@ -58,11 +63,12 @@ client.on("message", function (message) {
       });
   }
 });
-if (config) client.login(config.BOT_TOKEN);
-else client.login(process.env.DISCORD_TOKEN);
-
+if (local) {
+  client.login(config.BOT_TOKEN);
+} else {
+  client.login(process.env.DISCORD_TOKEN);
+}
 [];
-
 const getNewRole = (acronym, roles, member) => {
   member.roles.cache.forEach((element) => {
     if (
