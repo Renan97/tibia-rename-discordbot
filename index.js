@@ -58,8 +58,9 @@ client.on("message", function (message) {
       });
   }
 });
+if (config) client.login(config.BOT_TOKEN);
+else client.login(process.env.DISCORD_TOKEN);
 
-client.login(config.BOT_TOKEN);
 [];
 
 const getNewRole = (acronym, roles, member) => {
